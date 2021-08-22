@@ -1,0 +1,27 @@
+﻿@model ThanhToanTrucTuyen.DTO.SoTaiKhoanTheDTO
+
+<div>
+    <h4>Thông tin thẻ</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Stk)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stk)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoDuHienTai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoDuHienTai)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Ok", "Index")
+</p>

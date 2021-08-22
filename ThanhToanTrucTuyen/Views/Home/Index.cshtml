@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ThanhToanTrucTuyen.DTO.SoTaiKhoanTheDTO>
+
+<p>
+    @Html.ActionLink("Thêm tài khoản thẻ", "AddSTK")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Stk)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.SoDuHienTai)
+        </th>*@
+        @*<th>
+            @Html.DisplayNameFor(model => model.IdTK)
+        </th>*@
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Stk)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.SoDuHienTai)
+        </td>*@
+        @*<td>
+            @Html.DisplayFor(modelItem => item.IdTK)
+        </td>*@
+        <td>
+            @Html.ActionLink("Chuyển tiền", "ChuyenTien", new { id=item.Id }) |
+            @Html.ActionLink("Thông tin chi tiết", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Xóa tài khoản thẻ", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
