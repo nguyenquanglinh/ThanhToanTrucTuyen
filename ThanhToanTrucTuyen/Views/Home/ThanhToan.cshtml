@@ -1,0 +1,31 @@
+﻿<h4>Thông tin người nhận</h4>
+<h4>@ViewBag.err</h4>
+<hr />
+<table class="table">
+    <tr>
+        <th>
+            Tổng tiền
+        </th>
+        <th>
+            @ViewBag.TT
+        </th>
+    </tr>
+    <tr>
+        <th></th>
+
+        <th>
+            <div>
+                @Html.ActionLink("Thanh toán", "ThanhToanEnd", new { })
+            </div>
+        </th>
+    </tr>
+</table>
+
+<div>
+    @Html.ActionLink("Quay lại", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

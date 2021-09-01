@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ThanhToanTrucTuyen.DTO.SanPhamDTo>
+
+<table class="table">
+    <tr>
+        <th>
+            Tên sản phẩm
+        </th>
+        <th>
+            Hình ảnh 
+        </th>
+        <th>
+            Giá của sản phẩm
+        </th>
+        <th>
+            <a href="~/Home/">
+                @Html.ActionLink("Giỏ hàng", "GioHang", new {  })
+                <img src="~/Content/img/cart.png" class="img-rounded" />
+                @ViewBag.SL;
+            </a>
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.TenSP)
+    </td>
+    <td>
+        <img src="~/Content/img/@item.Anh" class="img-thumbnail"style="max-width:300px" >
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Gia)
+    </td>
+
+    <td>
+        @Html.ActionLink("Thêm vào giỏ hàng", "ThemVaoGioHang", new { id = item.Id })
+    </td>
+</tr>
+}
+
+</table>

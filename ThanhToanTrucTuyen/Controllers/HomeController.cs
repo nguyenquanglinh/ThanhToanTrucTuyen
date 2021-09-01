@@ -92,6 +92,7 @@ namespace ThanhToanTrucTuyen.Controllers
             }
             return RedirectToAction("Index");
         }
+        static List<SanPhamDTo> SSGioHang = new List<SanPhamDTo>();
         public ActionResult AddSTK()
         {
             return View();
@@ -105,5 +106,59 @@ namespace ThanhToanTrucTuyen.Controllers
             _.ThemSoTaiKhoanThe(new SoTaiKhoanTheDTO(Stk, SoDuHienTai, IdTK, Session["cks"].ToString()));
             return RedirectToAction("Index");
         }
+        public ActionResult MuaHang()
+        {
+            if (Session["cks"] == null || Session["id"] == null)
+                return RedirectToAction("Login");
+            ViewBag.SL = SSGioHang.Count;
+            return View(_.GetSanPhamDTos());
+        }
+        public ActionResult ThemVaoGioHang(string id)
+        {
+            var x = _.GetSanPhamDTos(id);
+            if (x != null)
+                SSGioHang.Add(x);
+            return RedirectToAction("MuaHang");
+
+        }
+        private static float TT = 0;
+        public ActionResult ThanhToan()
+        {
+            int tong = 0;
+            foreach (var item in SSGioHang)
+            {
+                tong += int.Parse(item.Gia);
+            }
+            TT = tong;
+            ViewBag.TT = tong;
+
+            return View();
+        }
+        public ActionResult GioHang()
+        {
+            return View(SSGioHang);
+        }
+        public ActionResult DeleteGH(string id)
+        {
+            SSGioHang.Remove(SSGioHang.Where(i => i.Id == id).FirstOrDefault());
+            return RedirectToAction("GioHang");
+        }
+        public ActionResult ThanhToanEnd()
+        {
+            if (Session["cks"] == null || Session["id"] == null)
+                return RedirectToAction("Login");
+            var chuyen = _.GetListSoTaiKhoanThe(Session["cks"].ToString(), Session["id"].ToString()).Where(i => int.Parse(i.SoDuHienTai) >= TT).FirstOrDefault();
+            if (chuyen != null)
+            {
+                float soDuConLai = int.Parse(chuyen.SoDuHienTai) - TT;
+                chuyen.SoDuHienTai = soDuConLai.ToString();
+                _.SuaSoTaiKhoanThe(chuyen);
+                SSGioHang = new List<SanPhamDTo>();
+                return RedirectToAction("Index");
+            }
+            ViewBag.err = "Không đủ tiền thanh toán";
+            return RedirectToAction("ThanhToan");
+        }
+
     }
 }

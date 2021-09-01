@@ -1,0 +1,37 @@
+﻿@model IEnumerable<ThanhToanTrucTuyen.DTO.SanPhamDTo>
+
+<p>
+    @Html.ActionLink("Thanh toán", "ThanhToan", "Home", new { area = "" }, null)
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenSP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Anh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gia)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenSP)
+        </td>
+        <td>
+            <img src="~/Content/img/@item.Anh" class="img-thumbnail" style="max-width:300px">
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gia)
+        </td>
+        <td>
+            @Html.ActionLink("Xóa khỏi giỏ hàng", "DeleteGH", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

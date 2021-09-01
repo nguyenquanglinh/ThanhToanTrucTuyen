@@ -11,7 +11,7 @@ namespace ThanhToanTrucTuyen.DTO
     {
         #region parameter connection
         SqlConnection connection = new SqlConnection();
-        public static string strConnString = "Data Source =" + "DESKTOP-NOP0M9L\\SQLEXPRESS;Database = ThanhToanTrucTuyen; Integrated Security=SSPI;";
+        public static string strConnString = "Data Source =" + @".\SQLEXPRESS;Database = ThanhToanTrucTuyen; Integrated Security=SSPI;";
         #endregion
 
         #region function cơ bản 
@@ -99,7 +99,7 @@ namespace ThanhToanTrucTuyen.DTO
         }
         #endregion
         #region thẻ
-        public List<SoTaiKhoanTheDTO> GetListSoTaiKhoanThe(string cks=null, string idTK = null)
+        public List<SoTaiKhoanTheDTO> GetListSoTaiKhoanThe(string cks = null, string idTK = null)
         {
             var ret = new List<SoTaiKhoanTheDTO>();
             string sql = "select * from SoTaiKhoanThe";
@@ -130,5 +130,30 @@ namespace ThanhToanTrucTuyen.DTO
             return ThucThiTruyVan(sql);
         }
         #endregion
+        public List<SanPhamDTo> GetSanPhamDTos()
+        {
+
+            var ret = new List<SanPhamDTo>();
+            string sql = "select * from SanPham";
+            //if (id != null)
+            //    sql = "select * from TaiKhoanDangNhap where id =" + id;
+            var x = LayDuLieuTruyVanSQL(sql);
+            for (int i = 0; i < x.Rows.Count; i++)
+            {
+                ret.Add(new SanPhamDTo(x.Rows[i]));
+            }
+            return ret;
+        }
+        public SanPhamDTo GetSanPhamDTos(string ID)
+        {
+            string sql = "select * from SanPham where id =" + ID;
+            var x = LayDuLieuTruyVanSQL(sql);
+            for (int i = 0; i < x.Rows.Count; i++)
+            {
+                return new SanPhamDTo(x.Rows[i]);
+            }
+            return null;
+        }
+
     }
 }

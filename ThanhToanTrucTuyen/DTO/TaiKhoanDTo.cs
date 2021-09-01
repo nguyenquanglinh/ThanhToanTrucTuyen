@@ -10,6 +10,21 @@ namespace ThanhToanTrucTuyen.DTO
     {
         public string Id { get; set; }
     }
+    public class SanPhamDTo : Table
+    {
+
+        public SanPhamDTo(DataRow dataRow)
+        {
+            Id = dataRow["id"].ToString().Trim();
+            TenSP = dataRow["TenSP"].ToString().Trim();
+            Anh = dataRow["Anh"].ToString().Trim();
+            Gia = dataRow["Gia"].ToString().Trim();
+        }
+
+        public String TenSP { get; set; }
+        public String Anh { get; set; }
+        public String Gia { get; set; }
+    }
     public class TaiKhoanDangNhapDTo : Table
     {
         public String TenDangNhap { get; set; }
